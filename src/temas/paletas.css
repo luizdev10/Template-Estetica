@@ -1,0 +1,94 @@
+@theme {
+
+  --color-fundo: #F5F1EC;          /* fundo calmo, bege neutro */
+  --color-texto: #2B1E1E;          /* texto corrido, marrom bem escuro */
+  --color-suave: #6B5C5A;          /* texto secundário (rodapé) */
+  --color-borda: #DED4CC;          /* linha divisória */
+ /* --color-destaque: #8B1A1A;*/       /* vermelho fechado: marca, frase, botão */
+  --color-destaque-escuro: #6B1313;/* hover do botão */
+  /*--color-amarelo: #F5C542; */       /* amarelo dourado: detalhes e hover */
+  --color-foto-claro: #D4C0B4;     /* topo do espaço da foto */
+  --color-foto-escuro: #A98D82;    /* base do espaço da foto */
+  --color-destaque: #7A1616;
+--color-amarelo: #E8B84A;
+
+
+ 
+  
+
+  /* Fontes */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+}
+
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+  --animate-subir: subir-suave 950ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-revelar-nome: revelar-nome 1300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-zoom-suave: zoom-suave 28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-linha: linha-crescer 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-revelar-foto: revelar-foto 1800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes subir-suave {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes revelar-nome {
+    from {
+      opacity: 0;
+      transform: translateY(36px) scale(0.94);
+      filter: blur(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes zoom-suave {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes linha-crescer {
+    from {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    to {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes revelar-foto {
+    from {
+      clip-path: inset(0 0 100% 0);
+      transform: scale(1.12);
+    }
+    to {
+      clip-path: inset(0 0 0% 0);
+      transform: scale(1);
+    }
+  }
+}

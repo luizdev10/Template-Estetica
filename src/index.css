@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@import "./temas/paletas.css";
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
