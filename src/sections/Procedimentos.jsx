@@ -32,6 +32,7 @@ export default function Procedimentos() {
                     tituloVisivel ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-sm"
                 }`}
             >
+                <div className="mb-4 h-0.5 w-8 bg-amarelo" />
 
                 <h2 className="font-display text-4xl md:text-6xl">
                     Cuidado pensado <br />
@@ -69,6 +70,14 @@ export default function Procedimentos() {
                             />
 
                             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+
+                            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.15] mix-blend-overlay motion-reduce:hidden" aria-hidden="true">
+                                <filter id={`grao-proc-${i}`}>
+                                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0" />
+                                </filter>
+                                <rect width="100%" height="100%" filter={`url(#grao-proc-${i})`} />
+                            </svg>
 
                             <ArrowUpRight className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
 
