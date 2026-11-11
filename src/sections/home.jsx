@@ -15,6 +15,16 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
 
+            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.18] mix-blend-overlay motion-reduce:hidden" aria-hidden="true">
+                <filter id="graoHero">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0" />
+                </filter>
+                <rect width="100%" height="100%" filter="url(#graoHero)" />
+            </svg>
+
+            <div className="absolute right-4 top-6 h-0.5 w-8 bg-amarelo sm:right-8 sm:top-8 lg:right-16 lg:top-10 xl:right-20" />
+
             <div ref={ref} className="relative z-10 mx-4 flex h-full flex-col justify-end gap-4 pb-10 sm:mx-8 sm:pb-14 lg:mx-16 lg:gap-6 lg:pb-20 xl:mx-20">
                 <div
                     className={`flex flex-col text-borda transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none motion-reduce:blur-none ${
