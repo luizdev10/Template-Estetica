@@ -59,8 +59,9 @@ export default function Procedimentos() {
                         >
                             <img
                                 src={item.imagem}
-                                alt=""
+                                alt={item.alt}
                                 loading="lazy"
+                                decoding="async"
                                 style={{ objectPosition: item.posicao, animationDelay: visivel ? `${atraso}ms` : undefined }}
                                 className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
                                     visivel ? "animate-revelar-foto motion-reduce:animate-none" : "scale-110 [clip-path:inset(0_0_100%_0)]"

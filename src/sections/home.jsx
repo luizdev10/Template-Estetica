@@ -9,6 +9,8 @@ export default function Home() {
             <img
                 src={fotomb}
                 alt=""
+                fetchPriority="high"
+                decoding="async"
                 className="absolute inset-0 h-full w-full origin-center object-cover object-[35%_30%] animate-zoom-suave motion-reduce:animate-none"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
