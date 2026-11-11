@@ -1,8 +1,10 @@
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import WhatsappFlutuante from "./components/WhatsappFlutuante.jsx";
 import Home from "./sections/home.jsx";
 import Proced from "./sections/Procedimentos.jsx";
 import Sobre from "./sections/Sobre.jsx";
+import Localizacao from "./sections/Localizacao.jsx";
 import Contato from "./sections/contato.jsx";
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
     <Home />
     <Proced />
     <Sobre />
+    <Localizacao />
     <Contato />
     <Footer />
+    <WhatsappFlutuante />
     </>
   )
 }

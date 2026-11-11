@@ -39,7 +39,7 @@ export default function Sobre() {
                         }`}
                     >
                         <p className="text-xs font-medium uppercase tracking-[0.18em] text-destaque">
-                            {profissional.registro} · {profissional.area}
+                            {[profissional.registro, profissional.area].filter(Boolean).join(" · ")}
                         </p>
 
 

@@ -9,7 +9,7 @@ import fotoProfissional from "../assets/images/dra.webp"
 
 export const profissional = {
   nome: "Dra. Nome Sobrenome",
-  registro: "CRO 00000",
+  registro: "", // CRO (dentista), CRBM (biomédico), CREFITO (fisioterapeuta) ou vazio
   area: "Harmonização facial",
   foto: fotoProfissional,
   alt: "Retrato da Dra. Nome Sobrenome, em fundo neutro e luz natural",
@@ -24,24 +24,26 @@ export const profissional = {
 }
 
 export const clinica = [
-    {nome: "exemplo"},
+    {nome: "Seu nome"},
     {telefone: "1199999999"},
     {endereco: "Rua exemplo, 123"}
 ];
 
 export const contato = {
-    whatsapp: "5511999999999",
+    whatsapp: "5588988853140",
     whatsappExibicao: "(11) 99999-9999",
     instagram: "exemplo.estetica",
     email: "contato@exemplo.com",
     atendimento: "Cidade, UF · com hora marcada",
     horario: "Seg a sáb, 9h às 19h",
+    endereco: "Rua Exemplo, 123 - Bairro, Cidade - UF",
 }
 
 export const menu = [
     {text: "Início", link: "#inicio"},
     {text: "Procedimentos", link: "#procedimentos"},
     {text: "Sobre", link: "#sobre"},
+    {text: "Localização", link: "#localizacao"},
     {text: "Contato", link: "#contato"},
 ]
 
