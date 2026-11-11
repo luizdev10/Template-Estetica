@@ -8,6 +8,9 @@ export default function Procedimentos() {
     const [refTitulo, tituloVisivel] = useReveal({ threshold: 0.1 })
     const [refGrade, visivel] = useReveal({ threshold: 0.1 })
 
+    const destaque = procedimentos[procedimentos.length - 1]
+    const resto = procedimentos.slice(0, -1)
+
     useEffect(() => {
         if (!selecionado) return
 
@@ -32,8 +35,6 @@ export default function Procedimentos() {
                     tituloVisivel ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-sm"
                 }`}
             >
-                <div className="mb-4 h-0.5 w-8 bg-amarelo" />
-
                 <h2 className="font-display text-4xl md:text-6xl">
                     Cuidado pensado <br />
                     para <span className="text-destaque-escuro">cada rosto.</span>
@@ -44,51 +45,28 @@ export default function Procedimentos() {
                 </p>
             </div>
 
-            <div ref={refGrade} className="mx-6 grid grid-cols-2 gap-3 pt-10 md:mx-10 md:grid-cols-3 md:gap-6 lg:mx-auto lg:max-w-5xl">
-                {procedimentos.map((item, i) => {
-                    const atraso = visivel ? i * 110 : 0
+            <div ref={refGrade} className="mx-6 flex flex-col gap-3 pt-10 md:mx-10 md:gap-4 lg:mx-auto lg:max-w-5xl lg:flex-row lg:gap-6">
+                <CardProcedimento
+                    item={destaque}
+                    destaque
+                    visivel={visivel}
+                    atraso={0}
+                    idGrao="grao-proc-destaque"
+                    onClick={() => setSelecionado(destaque)}
+                />
 
-                    return (
-                        <button
-                            key={i}
-                            type="button"
+                <div className="grid flex-1 grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+                    {resto.map((item, i) => (
+                        <CardProcedimento
+                            key={item.nome}
+                            item={item}
+                            visivel={visivel}
+                            atraso={(i + 1) * 110}
+                            idGrao={`grao-proc-${i}`}
                             onClick={() => setSelecionado(item)}
-                            style={visivel ? { transitionDelay: `${atraso}ms` } : undefined}
-                            className={`group relative aspect-[3/4] overflow-hidden rounded-lg transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none active:scale-[0.97] ${
-                                visivel ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-                            }`}
-                        >
-                            <img
-                                src={item.imagem}
-                                alt={item.alt}
-                                loading="lazy"
-                                decoding="async"
-                                style={{ objectPosition: item.posicao, animationDelay: visivel ? `${atraso}ms` : undefined }}
-                                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
-                                    visivel ? "animate-revelar-foto motion-reduce:animate-none" : "scale-110 [clip-path:inset(0_0_100%_0)]"
-                                }`}
-                            />
-
-                            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
-
-                            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.15] mix-blend-overlay motion-reduce:hidden" aria-hidden="true">
-                                <filter id={`grao-proc-${i}`}>
-                                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
-                                    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0" />
-                                </filter>
-                                <rect width="100%" height="100%" filter={`url(#grao-proc-${i})`} />
-                            </svg>
-
-                            <ArrowUpRight className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
-
-                            <div className="absolute inset-x-0 bottom-0">
-                                <p className="m-4 font-display text-xl text-fundo md:text-2xl ">
-                                    {item.nome}
-                                </p>
-                            </div>
-                        </button>
-                    )
-                })}
+                        />
+                    ))}
+                </div>
             </div>
 
 
@@ -156,5 +134,50 @@ export default function Procedimentos() {
                 </div>
             )}
         </section>
+    )
+}
+
+function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) {
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            style={visivel ? { transitionDelay: `${atraso}ms` } : undefined}
+            className={`group relative overflow-hidden rounded-lg transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none active:scale-[0.97] ${
+                destaque ? "aspect-[4/3] lg:aspect-auto lg:w-80 lg:shrink-0 xl:w-96" : "aspect-[3/4]"
+            } ${visivel ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+        >
+            <img
+                src={item.imagem}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                style={{ objectPosition: item.posicao, animationDelay: visivel ? `${atraso}ms` : undefined }}
+                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
+                    visivel ? "animate-revelar-foto motion-reduce:animate-none" : "scale-110 [clip-path:inset(0_0_100%_0)]"
+                }`}
+            />
+
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+
+            <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.15] mix-blend-overlay motion-reduce:hidden" aria-hidden="true">
+                <filter id={idGrao}>
+                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0" />
+                </filter>
+                <rect width="100%" height="100%" filter={`url(#${idGrao})`} />
+            </svg>
+
+            <ArrowUpRight className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
+
+            <div className="absolute inset-x-0 bottom-0">
+                {destaque && (
+                    <p className="mx-4 mt-4 text-[10px] font-medium uppercase tracking-[0.2em] text-amarelo">
+                        Mais procurado
+                    </p>
+                )}
+                <p className="m-4 font-display text-xl text-fundo md:text-2xl">{item.nome}</p>
+            </div>
+        </button>
     )
 }
