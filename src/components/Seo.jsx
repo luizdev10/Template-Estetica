@@ -6,15 +6,17 @@ export default function Seo() {
         const dados = {
             "@context": "https://schema.org",
             "@type": "MedicalBusiness",
-            name: clinica[0]?.nome,
-            telephone: contato.whatsappExibicao,
+            name: clinica.nome,
+            url: window.location.origin,
+            image: `${window.location.origin}/og-image.jpg`,
+            telephone: contato.whatsapp ? `+${contato.whatsapp}` : undefined,
             email: contato.email,
             address: {
                 "@type": "PostalAddress",
                 streetAddress: contato.endereco,
             },
-            openingHours: contato.horario,
-            sameAs: [`https://instagram.com/${contato.instagram}`],
+            openingHours: contato.horarioSchema,
+            sameAs: contato.instagram ? [`https://instagram.com/${contato.instagram}`] : undefined,
         };
 
         const script = document.createElement("script");

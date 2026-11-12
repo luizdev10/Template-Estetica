@@ -12,7 +12,7 @@ export default function Footer() {
                         href="#inicio"
                         className="w-fit font-display text-3xl leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amarelo focus-visible:ring-offset-2 focus-visible:ring-offset-destaque-escuro"
                     >
-                        {clinica[0].nome}
+                        {clinica.nome}
                         <span className="text-amarelo">.</span>
                     </a>
                     <p className="font-display text-sm italic text-fundo/70">
@@ -64,7 +64,7 @@ export default function Footer() {
             </div>
 
             <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-fundo/15 pt-6 text-[11px] text-fundo/55">
-                <p>© {new Date().getFullYear()} {clinica[0].nome}. Todos os direitos reservados.</p>
+                <p>© {new Date().getFullYear()} {clinica.nome}. Todos os direitos reservados.</p>
                 <a
                     href="#inicio"
                     className="transition-colors hover:text-amarelo focus-visible:outline-none focus-visible:text-amarelo"

@@ -6,6 +6,15 @@ import avaliacaoForm from "../assets/images/avaliacao-form.webp";
 import contatoDestaque from "../assets/images/contato-destaque.webp";
 
 
+// Mantém só dígitos (até 11) e aplica a máscara (DD) 9XXXX-XXXX
+const formatarTelefone = (valor) => {
+    const d = valor.replace(/\D/g, "").slice(0, 11)
+    if (d.length <= 2) return d.length ? `(${d}` : ""
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+}
+
 export default function Contato() {
 
     const [refTitulo, visivelTitulo] = useReveal({ threshold: 0.1 });
@@ -31,26 +40,30 @@ export default function Contato() {
 
             const aviso = {}
 
-        if (name.trim() === "" || name.trim().length < 4) {
-            aviso.nome = "Digite o seu nome!"
+        const numero = telefone.replace(/\D/g, "")
+
+        if (name.trim().length < 2) {
+            aviso.nome = "Digite o seu nome."
         }
-        if (telefone.length < 11) {
-            aviso.telefone = "Digite um telefone valido!"
+        if (numero.length < 10 || numero.length > 11) {
+            aviso.telefone = "Digite um telefone válido, com DDD."
         }
 
 
         setErrorForm(aviso)
 
         if (Object.keys(aviso).length > 0 ) return
-            
-        const texto = `Olá tudo bem? Eu gostaria de agendar uma avaliação.
-        
-        Nome: ${name.trim()}
-        WhatsApp: ${telefone}
-        Procedimento: ${proced.join(", ")}
-        Melhor periodo: ${periodo}
-        
-        Teriam disponibilidade para esse periodo?`
+
+        const texto = [
+            "Olá, tudo bem? Gostaria de agendar uma avaliação.",
+            "",
+            `Nome: ${name.trim()}`,
+            `WhatsApp: ${numero}`,
+            `Procedimento: ${proced.join(", ")}`,
+            `Melhor período: ${periodo}`,
+            "",
+            "Teriam disponibilidade para esse período?",
+        ].join("\n")
 
         window.open( `https://wa.me/${contato.whatsapp}?text=${encodeURIComponent(texto) }`, "_blank", "noopener")
     }
@@ -92,7 +105,7 @@ export default function Contato() {
     return (
         <section
             id="contato"
-            className="scroll-mt-28 border-t border-borda bg-fundo px-6 pb-20 pt-16 selection:bg-amarelo selection:text-destaque-escuro md:px-10 lg:px-[calc((100%-64rem)/2)]"
+            className="scroll-mt-28 border-t border-borda bg-fundo px-6 pb-28 pt-16 lg:pb-20 selection:bg-amarelo selection:text-destaque-escuro md:px-10 lg:px-[calc((100%-64rem)/2)]"
         >
 
             <div ref={refTitulo}>
@@ -201,10 +214,12 @@ export default function Contato() {
                             SEU WHATSAPP
                         </label>
                         <input
-                            type="tell"
+                            type="tel"
+                            inputMode="tel"
+                            autoComplete="tel"
                             value={telefone}
                             onChange={(e) => {
-                                setTelefone(e.target.value)
+                                setTelefone(formatarTelefone(e.target.value))
                                 setErrorForm({...erroForm, telefone: ""})
                             }}
                             placeholder="(88) 91111-2222"

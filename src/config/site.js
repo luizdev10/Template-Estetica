@@ -23,19 +23,32 @@ export const profissional = {
   ],
 }
 
-export const clinica = [
-    {nome: "Seu nome"},
-    {telefone: "1199999999"},
-    {endereco: "Rua exemplo, 123"}
-];
+export const clinica = {
+    nome: "Seu nome",
+    telefone: "1199999999",
+    endereco: "Rua exemplo, 123",
+};
+
+// Gera "(DD) 9XXXX-XXXX" a partir de 55DDDNUMERO (prefixo 55 assumido)
+const formatarWhatsapp = (numero) => {
+    const local = numero.replace(/\D/g, "").replace(/^55/, "")
+    const ddd = local.slice(0, 2)
+    const resto = local.slice(2)
+    const corte = resto.length - 4
+    return `(${ddd}) ${resto.slice(0, corte)}-${resto.slice(corte)}`
+}
+
+const whatsapp = "5588988853140" // Trocar só o whatsapp: formato 55DDDNUMERO, só dígitos
 
 export const contato = {
-    whatsapp: "5588988853140",
-    whatsappExibicao: "(11) 99999-9999",
+    whatsapp,
+    whatsappExibicao: formatarWhatsapp(whatsapp),
     instagram: "exemplo.estetica",
     email: "contato@exemplo.com",
     atendimento: "Cidade, UF · com hora marcada",
     horario: "Seg a sáb, 9h às 19h",
+    // Formato schema.org para buscadores: dias (Mo, Tu, We, Th, Fr, Sa, Su) + horário 24h
+    horarioSchema: "Mo-Sa 09:00-19:00",
     endereco: "Rua Exemplo, 123 - Bairro, Cidade - UF",
 }
 

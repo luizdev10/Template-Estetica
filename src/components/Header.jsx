@@ -58,7 +58,7 @@ export default function Header() {
                         onClick={() => setAberto(false)}
                         className="font-display text-3xl lowercase leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amarelo focus-visible:ring-offset-2 lg:text-4xl"
                     >
-                        {clinica[0].nome}
+                        {clinica.nome}
                         <span className="text-amarelo">.</span>
                     </a>
 
